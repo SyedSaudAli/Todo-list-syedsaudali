@@ -8,7 +8,7 @@ while (condition) {
             name: "todo",
             message: "What's you want select to option!",
             type: "list",
-            choices: ["Add", "Edit", "View", "Delete", "Exit"],
+            choices: ["Add", "Edit / Update", "View", "Delete", "Exit"],
         },
     ]);
     if (todo.todo === "Add") {
@@ -17,16 +17,22 @@ while (condition) {
                 name: "adds",
                 message: "Add list",
                 type: "input",
+                validate: function (value) {
+                    if (value.trim() !== "") {
+                        return true;
+                    }
+                    return "Please enter a non-empty value.";
+                }
             },
         ]);
-        todos.push(addtodo.adds);
+        todos.push(addtodo.adds.trim());
         console.log(todos);
     }
-    else if (todo.todo === "Edit") {
+    else if (todo.todo === "Edit / Update") {
         let edittodo = await inquirer.prompt([
             {
                 name: "edited",
-                message: "Edit list",
+                message: "Edit / Update list",
                 type: "list",
                 choices: todos.map((item) => item),
             },
@@ -36,10 +42,16 @@ while (condition) {
                 name: "editing",
                 message: "Update list",
                 type: "input",
+                validate: function (value) {
+                    if (value.trim() !== "") {
+                        return true;
+                    }
+                    return "Please enter a non-empty value.";
+                }
             },
         ]);
         let newtodos = todos.filter((val) => val !== edittodo.edited);
-        todos = [...newtodos, addedittodo.editing];
+        todos = [...newtodos, addedittodo.editing.trim()];
         console.log(todos);
     }
     else if (todo.todo === "View") {
