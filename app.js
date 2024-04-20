@@ -22,7 +22,7 @@ while (condition) {
                         return true;
                     }
                     return "Please enter a non-empty value.";
-                }
+                },
             },
         ]);
         todos.push(addtodo.adds.trim());
@@ -47,7 +47,7 @@ while (condition) {
                         return true;
                     }
                     return "Please enter a non-empty value.";
-                }
+                },
             },
         ]);
         let newtodos = todos.filter((val) => val !== edittodo.edited);
